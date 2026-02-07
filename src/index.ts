@@ -7,6 +7,7 @@
 
 import { Command } from 'commander';
 import { createConfigCommand } from './commands/config/index.js';
+import { createSendCommand } from './commands/emails/index.js';
 import { setNoColor } from './lib/output.js';
 import type { GlobalOptions } from './types/index.js';
 
@@ -53,12 +54,15 @@ function registerCommands(program: Command): void {
   // Configuration commands
   program.addCommand(createConfigCommand());
 
+  // Email commands
+  program.addCommand(createSendCommand());
+
   // TODO: Add more commands in future phases
-  // - send (Phase 1)
-  // - domains (Phase 2)
-  // - api-keys (Phase 2)
-  // - contacts (Phase 3)
-  // - audiences (Phase 3)
+  // - domains (Phase 3)
+  // - api-keys (Phase 3)
+  // - contacts (Phase 4)
+  // - audiences (Phase 4)
+  // - broadcasts (Phase 5)
 }
 
 /**

@@ -131,11 +131,26 @@ function formatValue(value: unknown): string {
 }
 
 /**
+ * Format a success message string
+ */
+export function formatSuccess(message: string): string {
+  const c = getChalk();
+  return `${c.green('✓')} ${message}`;
+}
+
+/**
+ * Format an error message string
+ */
+export function formatError(message: string): string {
+  const c = getChalk();
+  return `${c.red('✗')} ${message}`;
+}
+
+/**
  * Print success message
  */
 export function success(message: string): void {
-  const c = getChalk();
-  console.log(c.green('✓'), message);
+  console.log(formatSuccess(message));
 }
 
 /**
