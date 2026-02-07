@@ -145,18 +145,29 @@ export function validateConfig(config: Partial<ResolvedConfig>): config is Resol
 }
 
 /**
- * Get API key from configuration or environment
+ * Get API key from override, environment, or configuration
  */
-export async function getApiKey(): Promise<string> {
-  const config = await loadConfig();
-
-  if (!config.apiKey) {
-    throw new Error(
-      'API key not found. Set RESEND_API_KEY environment variable or run: resend config set apiKey YOUR_API_KEY'
-    );
+export function getApiKey(override?: string): string | undefined {
+  // Priority: override > environment > config file
+  if (override) {
+    return override;
   }
 
-  return config.apiKey;
+  if (process.env.RESEND_API_KEY) {
+    return process.env.RESEND_API_KEY;
+  }
+
+  // Try to load from config file synchronously
+  try {
+    const configPath = expandPath(CONFIG_FILE_PATHS[0] as string);
+    const file = Bun.file(configPath);
+    // Use synchronous check - loadConfig is async but we need sync here
+    const content = require('fs').readFileSync(configPath, 'utf-8');
+    const config = JSON.parse(content);
+    return config.apiKey;
+  } catch {
+    return undefined;
+  }
 }
 
 /**
