@@ -7,13 +7,12 @@
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
 
-    // Output configuration
+    // Output configuration (Bun handles actual build)
     "outDir": "./dist",
     "rootDir": "./src",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
 
     // Type checking - strict mode enabled
     "strict": true,
