@@ -1,0 +1,32 @@
+[
+  {
+    "from": "sender@example.com",
+    "to": "recipient1@example.com",
+    "subject": "Welcome to Our Service",
+    "text": "Hello! Thanks for signing up.",
+    "tags": [
+      { "name": "category", "value": "onboarding" },
+      { "name": "priority", "value": "high" }
+    ]
+  },
+  {
+    "from": "sender@example.com",
+    "to": ["recipient2@example.com", "recipient3@example.com"],
+    "subject": "Weekly Newsletter",
+    "html": "<h1>This Week's Updates</h1><p>Here are the latest updates...</p>",
+    "tags": [
+      { "name": "category", "value": "newsletter" }
+    ]
+  },
+  {
+    "from": "sender@example.com",
+    "to": "recipient4@example.com",
+    "subject": "Password Reset Request",
+    "text": "Click the link below to reset your password.",
+    "reply_to": "support@example.com",
+    "tags": [
+      { "name": "category", "value": "transactional" },
+      { "name": "type", "value": "password-reset" }
+    ]
+  }
+]

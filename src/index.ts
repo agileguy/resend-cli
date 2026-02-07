@@ -7,7 +7,12 @@
 
 import { Command } from 'commander';
 import { createConfigCommand } from './commands/config/index.js';
-import { createSendCommand } from './commands/emails/index.js';
+import { createEmailsCommand } from './commands/emails/index.js';
+import { createDomainsCommand } from './commands/domains/index.js';
+import { createBroadcastsCommand } from './commands/broadcasts/index.js';
+import { createWebhooksCommand } from './commands/webhooks/index.js';
+import { createAudiencesCommand } from './commands/audiences/index.js';
+import { createContactsCommand } from './commands/contacts/index.js';
 import { setNoColor } from './lib/output.js';
 import type { GlobalOptions } from './types/index.js';
 
@@ -55,14 +60,23 @@ function registerCommands(program: Command): void {
   program.addCommand(createConfigCommand());
 
   // Email commands
-  program.addCommand(createSendCommand());
+  program.addCommand(createEmailsCommand());
+
+  // Domain commands
+  program.addCommand(createDomainsCommand());
+
+  // Audience and contact commands
+  program.addCommand(createAudiencesCommand());
+  program.addCommand(createContactsCommand());
+
+  // Broadcast commands
+  program.addCommand(createBroadcastsCommand());
+
+  // Webhook commands
+  program.addCommand(createWebhooksCommand());
 
   // TODO: Add more commands in future phases
-  // - domains (Phase 3)
   // - api-keys (Phase 3)
-  // - contacts (Phase 4)
-  // - audiences (Phase 4)
-  // - broadcasts (Phase 5)
 }
 
 /**

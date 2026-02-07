@@ -1,16 +1,20 @@
 {
   "name": "resend-cli",
-  "version": "0.1.0",
-  "description": "Official CLI for Resend - The Email API for Developers",
+  "version": "1.0.0",
+  "description": "Command-line interface for Resend - The Email API for Developers",
   "type": "module",
   "bin": {
     "resend": "./dist/index.js"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun --format esm && chmod +x dist/index.js",
+    "build": "bun build src/index.ts --outdir dist --target node --format esm && chmod +x dist/index.js",
     "dev": "bun run src/index.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
@@ -21,26 +25,34 @@
     "email",
     "cli",
     "api",
-    "developer-tools"
+    "developer-tools",
+    "transactional-email",
+    "email-api",
+    "command-line"
   ],
-  "author": "Resend",
+  "author": "agileguy",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/resendlabs/resend-cli"
+    "url": "https://github.com/agileguy/resend-cli.git"
+  },
+  "homepage": "https://github.com/agileguy/resend-cli#readme",
+  "bugs": {
+    "url": "https://github.com/agileguy/resend-cli/issues"
   },
   "engines": {
+    "node": ">=18.0.0",
     "bun": ">=1.0.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/node": "^25.2.1"
+    "@types/node": "^22.0.0"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "chalk": "^5.6.2",
-    "commander": "^14.0.3"
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0"
   }
 }

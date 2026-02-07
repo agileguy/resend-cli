@@ -26,6 +26,8 @@ export function createSendCommand(): Command {
     .option('--bcc <email...>', 'BCC recipient(s)')
     .option('--reply-to <email>', 'Reply-to address')
     .option('--tag <name:value...>', 'Tags in name:value format')
+    .option('--attachment <path...>', 'File attachment(s) (can be used multiple times)')
+    .option('--scheduled-at <datetime>', 'Schedule email for later (ISO 8601 format)')
     .action(async (options, command) => {
       const globalOpts = command.optsWithGlobals();
 
@@ -104,6 +106,49 @@ export function createSendCommand(): Command {
           });
         }
 
+        // Process attachments
+        let attachments: Array<{ filename: string; content: string; content_type?: string }> | undefined;
+        if (options.attachment) {
+          const attachmentPaths = Array.isArray(options.attachment) ? options.attachment : [options.attachment];
+          attachments = [];
+
+          for (const attachmentPath of attachmentPaths) {
+            const resolvedPath = path.resolve(attachmentPath);
+            if (!fs.existsSync(resolvedPath)) {
+              console.error(formatError(`Attachment file not found: ${resolvedPath}`));
+              process.exit(1);
+            }
+
+            // Read file and convert to base64
+            const fileContent = fs.readFileSync(resolvedPath);
+            const base64Content = fileContent.toString('base64');
+            const filename = path.basename(resolvedPath);
+
+            attachments.push({
+              filename,
+              content: base64Content,
+            });
+          }
+        }
+
+        // Validate scheduled time if provided
+        if (options.scheduledAt) {
+          try {
+            const date = new Date(options.scheduledAt);
+            if (isNaN(date.getTime())) {
+              throw new Error('Invalid date');
+            }
+            // Check if date is in the future
+            if (date <= new Date()) {
+              console.error(formatError('Scheduled time must be in the future'));
+              process.exit(1);
+            }
+          } catch {
+            console.error(formatError('Invalid date format. Use ISO 8601 format (e.g., 2024-12-31T23:59:59Z)'));
+            process.exit(1);
+          }
+        }
+
         // Build request
         const request: SendEmailRequest = {
           from: options.from,
@@ -133,6 +178,14 @@ export function createSendCommand(): Command {
 
         if (tags) {
           request.tags = tags;
+        }
+
+        if (attachments) {
+          request.attachments = attachments;
+        }
+
+        if (options.scheduledAt) {
+          request.scheduled_at = options.scheduledAt;
         }
 
         // Send email
