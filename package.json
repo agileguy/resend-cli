@@ -1,5 +1,5 @@
 {
-  "name": "resend-cli",
+  "name": "resend-email-cli",
   "version": "1.0.0",
   "description": "Command-line interface for Resend - The Email API for Developers",
   "type": "module",
@@ -14,7 +14,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target node --format esm && chmod +x dist/index.js",
+    "build": "bun build src/index.ts --outdir dist --target node --format esm && sed -i '' '1s|#!/usr/bin/env bun|#!/usr/bin/env node|' dist/index.js && chmod +x dist/index.js",
     "dev": "bun run src/index.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit",

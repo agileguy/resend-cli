@@ -1,6 +1,6 @@
 # Resend CLI
 
-[![npm version](https://img.shields.io/npm/v/resend-cli.svg)](https://www.npmjs.com/package/resend-cli)
+[![npm version](https://img.shields.io/npm/v/resend-email-cli.svg)](https://www.npmjs.com/package/resend-email-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A powerful command-line interface for the [Resend](https://resend.com) email API. Send emails, manage domains, contacts, audiences, broadcasts, and webhooks directly from your terminal.
@@ -20,10 +20,10 @@ A powerful command-line interface for the [Resend](https://resend.com) email API
 
 ```bash
 # Using npm
-npm install -g resend-cli
+npm install -g resend-email-cli
 
 # Using bun
-bun install -g resend-cli
+bun install -g resend-email-cli
 ```
 
 ## Quick Start
@@ -347,4 +347,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [Resend Website](https://resend.com)
 - [Resend API Documentation](https://resend.com/docs)
 - [GitHub Repository](https://github.com/agileguy/resend-cli)
-- [npm Package](https://www.npmjs.com/package/resend-cli)
+- [npm Package](https://www.npmjs.com/package/resend-email-cli)
