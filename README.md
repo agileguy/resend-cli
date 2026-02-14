@@ -1,7 +1,7 @@
 # Resend CLI
 
 <p align="center">
-  <img src="docs/logo.png" alt="Resend CLI Logo" width="200">
+  <img src="https://raw.githubusercontent.com/agileguy/resend-cli/main/docs/logo.png" alt="Resend CLI Logo" width="200">
 </p>
 
 [![npm version](https://img.shields.io/npm/v/resend-email-cli.svg)](https://www.npmjs.com/package/resend-email-cli)
